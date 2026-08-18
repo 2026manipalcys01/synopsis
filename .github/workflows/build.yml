@@ -1,0 +1,32 @@
+name: Build PDF
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Compile
+        run: latexmk
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: report-pdf
+          path: build/*.pdf
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v3
+        with:
+          files: build/*.pdf

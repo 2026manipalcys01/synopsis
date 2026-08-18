@@ -1,0 +1,161 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+\usepackage[english]{babel}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{amsmath, amssymb, amsthm}
+
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{listings}
+
+\usepackage{enumitem}
+\usepackage[autostyle]{csquotes}
+
+\usepackage{fancyhdr}
+
+\usepackage{hyperref}
+
+\usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+\newcommand{\reporttitle}{Report Title}
+\newcommand{\reportsubtitle}{A short, descriptive subtitle}
+\newcommand{\coursename}{Course Name}
+\newcommand{\coursecode}{CS0000}
+\newcommand{\professor}{Prof. Name}
+\newcommand{\studentname}{Your Name}
+\newcommand{\studentid}{Roll / ID Number}
+\newcommand{\institution}{Your Institution}
+\newcommand{\department}{Department Name}
+
+\newif\ifshowtoc\showtoctrue
+\newif\ifshowfigures\showfigurestrue
+\newif\ifshowtables\showtablestrue
+\newif\ifshowlistings\showlistingstrue
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor={blue!50!black},
+  urlcolor={blue!60!black},
+  pdftitle={\reporttitle},
+  pdfauthor={\studentname}
+}
+
+\definecolor{codegray}{gray}{0.5}
+\definecolor{codegreen}{rgb}{0,0.5,0}
+\definecolor{codeback}{gray}{0.97}
+\lstdefinestyle{report}{
+  backgroundcolor=\color{codeback},
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue!60!black}\bfseries,
+  commentstyle=\color{codegreen}\itshape,
+  stringstyle=\color{codegray},
+  numbers=left,
+  numberstyle=\tiny\color{codegray},
+  numbersep=8pt,
+  frame=single,
+  rulecolor=\color{black!15},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b
+}
+\lstset{style=report}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small \coursecode}
+\rhead{\small \reporttitle}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\thispagestyle{empty}
+\begin{center}
+  \vspace*{1cm}
+
+  {\scshape\Large \institution\par}
+  {\scshape \department\par}
+  \vspace{0.5cm}
+  \rule{\linewidth}{0.4pt}
+  \vspace{1.5cm}
+
+  {\Huge\bfseries \reporttitle\par}
+  \vspace{0.4cm}
+  {\Large\itshape \reportsubtitle\par}
+  \vspace{2cm}
+
+  \begin{tabular}{rl}
+    \textbf{Course}     & \coursename\ (\coursecode) \\[4pt]
+    \textbf{Instructor} & \professor \\[4pt]
+    \textbf{Student}    & \studentname \\[4pt]
+    \textbf{ID}         & \studentid \\
+  \end{tabular}
+
+  \vfill
+  {\large \today\par}
+\end{center}
+\clearpage
+
+\begin{abstract}
+\noindent A short summary of the report goes here. State the problem,
+what you did, and the main result in three or four sentences.
+\end{abstract}
+\clearpage
+
+\ifshowtoc
+  \tableofcontents
+  \clearpage
+\fi
+
+\ifshowfigures
+  \phantomsection
+  \addcontentsline{toc}{section}{\listfigurename}
+  \listoffigures
+  \clearpage
+\fi
+
+\ifshowtables
+  \phantomsection
+  \addcontentsline{toc}{section}{\listtablename}
+  \listoftables
+  \clearpage
+\fi
+
+\ifshowlistings
+  \phantomsection
+  \addcontentsline{toc}{section}{\lstlistlistingname}
+  \lstlistoflistings
+  \clearpage
+\fi
+
+\pagenumbering{arabic}
+
+\input{sections/introduction}
+\input{sections/method}
+\input{sections/results}
+\input{sections/conclusion}
+
+\printbibliography
+
+\end{document}

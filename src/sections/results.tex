@@ -1,0 +1,37 @@
+\section{Results}
+Present findings. Tables use \texttt{booktabs} rules for a clean look.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{lr}
+    \toprule
+    Item   & Value \\
+    \midrule
+    First  & 42 \\
+    Second & 7  \\
+    \bottomrule
+  \end{tabular}
+  \caption{An example table.}
+  \label{tab:example}
+\end{table}
+
+Figures work the same way. This one is drawn with Ti\emph{k}Z, so it
+needs no external image file:
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (0,0) -- (4.2,0) node[right] {$x$};
+    \draw[->] (0,0) -- (0,3)   node[above] {$y$};
+    \draw[blue!60!black, thick, domain=0:4, samples=100]
+      plot (\x, {0.4*(\x)*(\x) - 0.2*(\x)});
+  \end{tikzpicture}
+  \caption{A curve drawn inline with Ti\emph{k}Z.}
+  \label{fig:tikz}
+\end{figure}
+
+To use a real image instead, save it to \texttt{src/figures/} and include
+it with:
+\begin{center}
+  \verb|\includegraphics[width=0.6\linewidth]{name}|
+\end{center}
