@@ -1,161 +1,118 @@
-\documentclass[11pt,a4paper]{article}
-
-\usepackage[margin=1in]{geometry}
+\documentclass[12pt,a4paper]{article}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{lmodern}
+\usepackage{mathptmx}
+\usepackage[english]{babel}
 \usepackage{microtype}
 
-\usepackage[english]{babel}
+\usepackage[a4paper,margin=1in]{geometry}
 \usepackage{setspace}
-\onehalfspacing
-
-\usepackage{amsmath, amssymb, amsthm}
-
 \usepackage{graphicx}
 \graphicspath{{figures/}}
-\usepackage{booktabs}
-\usepackage{caption}
 \usepackage{xcolor}
-\usepackage{tikz}
-\usepackage{listings}
-
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{arydshln}
 \usepackage{enumitem}
-\usepackage[autostyle]{csquotes}
-
+\usepackage{caption}
 \usepackage{fancyhdr}
-
-\usepackage{hyperref}
+\usepackage[autostyle]{csquotes}
+\usepackage[hidelinks]{hyperref}
 
 \usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
 \addbibresource{references.bib}
 
-\newcommand{\reporttitle}{Report Title}
-\newcommand{\reportsubtitle}{A short, descriptive subtitle}
-\newcommand{\coursename}{Course Name}
-\newcommand{\coursecode}{CS0000}
-\newcommand{\professor}{Prof. Name}
-\newcommand{\studentname}{Your Name}
-\newcommand{\studentid}{Roll / ID Number}
-\newcommand{\institution}{Your Institution}
-\newcommand{\department}{Department Name}
+\newcommand{\projecttitle}{Design and Development of an Adaptive Gamified Web Security Training Platform for Penetration Testing Education}
+\newcommand{\projectdate}{19/08/2026}
 
-\newif\ifshowtoc\showtoctrue
-\newif\ifshowfigures\showfigurestrue
-\newif\ifshowtables\showtablestrue
-\newif\ifshowlistings\showlistingstrue
+\definecolor{manipalorange}{HTML}{B85E27}
 
-\hypersetup{
-  colorlinks=true,
-  linkcolor=black,
-  citecolor={blue!50!black},
-  urlcolor={blue!60!black},
-  pdftitle={\reporttitle},
-  pdfauthor={\studentname}
-}
-
-\definecolor{codegray}{gray}{0.5}
-\definecolor{codegreen}{rgb}{0,0.5,0}
-\definecolor{codeback}{gray}{0.97}
-\lstdefinestyle{report}{
-  backgroundcolor=\color{codeback},
-  basicstyle=\ttfamily\footnotesize,
-  keywordstyle=\color{blue!60!black}\bfseries,
-  commentstyle=\color{codegreen}\itshape,
-  stringstyle=\color{codegray},
-  numbers=left,
-  numberstyle=\tiny\color{codegray},
-  numbersep=8pt,
-  frame=single,
-  rulecolor=\color{black!15},
-  breaklines=true,
-  showstringspaces=false,
-  tabsize=2,
-  captionpos=b
-}
-\lstset{style=report}
+\hypersetup{pdftitle={\projecttitle}, pdfsubject={Mini-Project Synopsis}}
 
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\small \coursecode}
-\rhead{\small \reporttitle}
-\cfoot{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[L]{\small Manipal School of Information Sciences}
+\fancyfoot[R]{\small\thepage}
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{definition}{Definition}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{1.4ex plus .3ex minus .2ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1.1ex plus .2ex minus .2ex}{0.5ex}
+
+\newcommand{\dgbuild}{../build/diagrams/}
+\newcommand{\diagramfig}[3]{%
+  \begin{figure}[htbp]\centering
+  \IfFileExists{\dgbuild#1.pdf}%
+    {\includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{\dgbuild#1.pdf}}%
+    {\fbox{\parbox[c][3.2cm][c]{0.9\linewidth}{\centering\itshape
+       Diagram placeholder. Run \texttt{bash diagrams/render.sh} to build
+       \texttt{#1} from its Mermaid source in \texttt{diagrams/}.}}}%
+  \caption{#2}\label{#3}
+  \end{figure}}
 
 \begin{document}
 
-\pagenumbering{roman}
+\begingroup
+\centering
+\includegraphics[width=0.78\textwidth]{manipal-header}
 
-\thispagestyle{empty}
-\begin{center}
-  \vspace*{1cm}
+\vspace{1.3cm}
 
-  {\scshape\Large \institution\par}
-  {\scshape \department\par}
-  \vspace{0.5cm}
-  \rule{\linewidth}{0.4pt}
-  \vspace{1.5cm}
+{\color{manipalorange}\bfseries\fontsize{21}{26}\selectfont \projecttitle\par}
 
-  {\Huge\bfseries \reporttitle\par}
-  \vspace{0.4cm}
-  {\Large\itshape \reportsubtitle\par}
-  \vspace{2cm}
+\vspace{0.7em}
+{\bfseries\fontsize{16}{20}\selectfont Mini-Project Synopsis\par}
 
-  \begin{tabular}{rl}
-    \textbf{Course}     & \coursename\ (\coursecode) \\[4pt]
-    \textbf{Instructor} & \professor \\[4pt]
-    \textbf{Student}    & \studentname \\[4pt]
-    \textbf{ID}         & \studentid \\
-  \end{tabular}
+\vspace{1.2cm}
+{\itshape submitted to\par}
 
-  \vfill
-  {\large \today\par}
-\end{center}
+\vspace{0.8cm}
+{\fontsize{14}{18}\selectfont Manipal School of Information Sciences, MAHE, Manipal\par}
+
+\vspace{1.3cm}
+
+\renewcommand{\arraystretch}{1.9}
+\setlength{\dashlinedash}{2pt}
+\setlength{\dashlinegap}{2pt}
+\begin{tabular}{:>{\centering\arraybackslash}p{3.8cm}:>{\centering\arraybackslash}p{4.0cm}:>{\centering\arraybackslash}p{3.4cm}:}
+\hdashline
+\bfseries Reg. Number & \bfseries Name & \bfseries Branch\\ \hdashline
+261100690008 & Prathiksha Patil & Cyber Security\\ \hdashline
+261100690027 & Aditi Biju & Cyber Security\\ \hdashline
+261100690032 & Anish Shobith P S & Cyber Security\\ \hdashline
+\end{tabular}
+
+\vfill
+
+{\bfseries\fontsize{14}{18}\selectfont \projectdate\par}
+
+\vspace{0.5cm}
+
+\begin{flushleft}
+\includegraphics[width=0.82\textwidth]{msis-footer}
+\end{flushleft}
+
+\vspace{0.3cm}
+\par
+\endgroup
 \clearpage
 
-\begin{abstract}
-\noindent A short summary of the report goes here. State the problem,
-what you did, and the main result in three or four sentences.
-\end{abstract}
-\clearpage
+\setstretch{1.05}
 
-\ifshowtoc
-  \tableofcontents
-  \clearpage
-\fi
+\input{sections/01-abstract}
+\input{sections/02-introduction}
+\input{sections/03-literature-review}
+\input{sections/04-objectives}
+\input{sections/05-methodology}
+\input{sections/06-requirements}
+\input{sections/07-outcomes}
 
-\ifshowfigures
-  \phantomsection
-  \addcontentsline{toc}{section}{\listfigurename}
-  \listoffigures
-  \clearpage
-\fi
+\newpage
 
-\ifshowtables
-  \phantomsection
-  \addcontentsline{toc}{section}{\listtablename}
-  \listoftables
-  \clearpage
-\fi
-
-\ifshowlistings
-  \phantomsection
-  \addcontentsline{toc}{section}{\lstlistlistingname}
-  \lstlistoflistings
-  \clearpage
-\fi
-
-\pagenumbering{arabic}
-
-\input{sections/introduction}
-\input{sections/method}
-\input{sections/results}
-\input{sections/conclusion}
-
-\printbibliography
+\printbibliography[title=References]
 
 \end{document}

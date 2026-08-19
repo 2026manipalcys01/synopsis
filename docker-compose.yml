@@ -1,7 +1,8 @@
 services:
   latex:
-    image: texlive/texlive:latest
+    build: .
+    image: synopsis-builder
     working_dir: /work
     volumes:
       - .:/work
-    command: latexmk -pvc -view=none
+    command: sh -c "bash scripts/render-diagrams.sh && latexmk -pvc -view=none"

@@ -17,12 +17,21 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Render diagram PDFs from committed SVGs
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends librsvg2-bin
+          mkdir -p build/diagrams
+          for svg in src/figures/*.svg; do
+            [ -e "$svg" ] || continue
+            rsvg-convert -f pdf -o "build/diagrams/$(basename "$svg" .svg).pdf" "$svg"
+          done
+
       - name: Compile
         run: latexmk
 
       - uses: actions/upload-artifact@v7
         with:
-          name: report-pdf
+          name: synopsis-pdf
           path: build/*.pdf
 
       - name: Release

@@ -1,0 +1,25 @@
+flowchart LR
+    subgraph Clients
+        SB[Student browser]
+        IB[Instructor browser]
+    end
+
+    subgraph Platform["Training platform (trusted)"]
+        API["App + API<br/>scoring, gamification, hints"]
+        ML["Analytics + ML worker<br/>predict + recommend"]
+        DASH[Instructor dashboard]
+    end
+
+    subgraph Isolated["Vulnerable zone - network-isolated to campus network"]
+        VULN["Vulnerable web app<br/>(seeded OWASP Top 10)"]
+    end
+
+    DB[(Database)]
+
+    SB -->|attacks challenges| VULN
+    SB -->|points, badges, hints, next challenge| API
+    IB --> DASH
+    VULN -->|server-side verified result| API
+    API -->|attempt record| DB
+    ML -->|read attempts, write progress| DB
+    DASH --> DB
